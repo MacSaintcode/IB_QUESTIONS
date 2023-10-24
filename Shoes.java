@@ -1,4 +1,4 @@
-package macpackage2;
+package saintcoded;
 
 class Running {
 	public final double weight;

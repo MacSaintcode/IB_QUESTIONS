@@ -1,10 +1,10 @@
-package macpackage2;
+package saintcoded;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 public class ipAdd {
 	Integer a;
-	String valid[] = { "1,2,3,4,5,6,7,8,9,0,." };
 
 	boolean checkip(String ip) {
 		boolean choice = true;
@@ -15,34 +15,43 @@ public class ipAdd {
 
 		System.out.println("SEARCHING FOR IP ADDRESS:" + addr);
 		int i = 0;
-		String v[]=valid.toString().split(",");
-//		String val[] = Arrays.toString(valid).split(",");
-
-		System.out.println(Arrays.toString(v));
 
 		while (i <= address.length - 1) {
-//			for (int t = 0; t < val.length; t++)
-//				if (address[t] != val[t]) {
-//					choice = false;
-//					break;
-//				}
 
-			if (address[i].toString().equals("")) {
+			try {
+				if (address[i].equals("")) {
+					choice = false;
+					break;
+				} else if (address[i].length() > 3) {
+					choice = false;
+					break;
+				}
+
+				a = Integer.parseInt(address[i]);
+			} catch (NumberFormatException ea) {
 				choice = false;
 				break;
 			}
-			a = Integer.parseInt(address[i]);
 			if (a.toString().length() <= 3 && address.length == 4)
 				choice = true;
 			i++;
-			if (a.toString().length() > 3 || address.length != 4 || a > 255 || a.toString().length() == 0||ip.endsWith(".")) {
+
+			if (/* a.toString().length() > 3|| */ address.length != 4 || a > 255 || a < 0 || a.toString().length() == 0
+					|| ip.endsWith(".")) {
 				choice = false;
 				break;
 			}
+			for (int l = 0; a.toString().length() == l; l++) {
+//				String[] spil = address;
+				if (address[l].contains("-")) {
+					choice = false;
+					break;
+				}
 
+			}
 		}
 
-		if (choice == false || ip.endsWith("."))
+		if (choice == false /* || ip.endsWith(".") */)
 
 		{
 			System.err.println(choice);
@@ -61,9 +70,14 @@ public class ipAdd {
 
 	public static void main(String[] args) {
 		ipAdd call = new ipAdd();
-		call.checkip("k.l.243.455");// FALSE
-		call.checkip("117.13.41.158");// TRUE
-		call.checkip("317.243.455.758");// FALSE
+		String called[] = { "57.78.0.0000", "-0.13.41.158", "22.243.19.000" };
+		int i = 0;
+		for (String item : called) {
+			call.checkip(called[i]);
+			i++;
+
+		}
+
 //		System.out.println("MR JIDE SAID \"MR UDOKA CANT HELP/\\ ASSIST HIMSELF\"");
 	}
 }

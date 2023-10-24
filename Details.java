@@ -1,4 +1,4 @@
-package macpackage2;
+package saintcoded;
 
 import java.util.Scanner;
 
